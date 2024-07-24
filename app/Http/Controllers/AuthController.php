@@ -36,7 +36,7 @@ class AuthController extends Controller
                 'access_token' => $accessToken,
             ],
             message: 'User registered successfully.',
-            status: 201
+            responseCode: 201
         );
     }
     
@@ -50,7 +50,8 @@ class AuthController extends Controller
         if (!auth()->attempt($validatedData)) {
             return $this->jsonResponse(
                 message: 'Invalid credentials.',
-                status: 401
+                responseCode: 401,
+                status: false
             );
         }
 
@@ -64,7 +65,6 @@ class AuthController extends Controller
                 'access_token' => $accessToken,
             ],
             message: 'User logged in successfully.',
-            status: 200
         );
     }
 
@@ -74,7 +74,6 @@ class AuthController extends Controller
 
         return $this->jsonResponse(
             message: 'User logged out successfully.',
-            status: 200
         );
     }
 }
