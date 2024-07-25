@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use App\Enum\TaskStatusEnum;
+use App\Enums\TaskStatusEnum;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-    use HasFactory;
+    use HasUuids, HasFactory;
 
     protected $guarded = ['id'];
 
@@ -30,6 +31,6 @@ class Task extends Model
 
     public function getStatusAttribute($value)
     {
-        return TaskStatusEnum::GetEnumsValueByName($value);
+        return TaskStatusEnum::GetEnumsNameByValue($value);
     }
 }

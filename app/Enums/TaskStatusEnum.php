@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enum;
+namespace App\Enums;
 
 class TaskStatusEnum
 {
@@ -10,7 +10,7 @@ class TaskStatusEnum
 
     public const COMPLETED = 'completed';
 
-    public static function GetEnumsNameByValue(int $id): string
+    public static function GetEnumsNameByValue(string $id): string
     {
         return match ($id) {
             static::PENDING => 'pending',

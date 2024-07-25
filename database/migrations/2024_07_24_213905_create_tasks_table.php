@@ -1,6 +1,6 @@
 <?php
 
-use App\Enum\TaskStatusEnum;
+use App\Enums\TaskStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->foreignId('user_id')->constrained();
-            $table->string('status')->default('pending')->index();
+            $table->string('status')->default(TaskStatusEnum::PENDING)->index();
             $table->timestamp('completed_at')->nullable();
             $table->timestamps();
         });
