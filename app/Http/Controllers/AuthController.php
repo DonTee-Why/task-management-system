@@ -12,28 +12,22 @@ class AuthController extends Controller
     //
     public function register(Request $request)
     {
-        // Validate the request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|unique:users|max:255',
             'password' => 'required|string|min:8',
         ]);
 
-        // Create a new user
         $user = User::query()->create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
         ]);
 
-        // Generate a new access token for the user
-        $accessToken = $user->createToken('authToken')->plainTextToken;
-
         // Return the user data and access token
         return $this->jsonResponse(
             data: [
                 'user' => $user,
-                'access_token' => $accessToken,
             ],
             message: 'User registered successfully.',
             responseCode: 201

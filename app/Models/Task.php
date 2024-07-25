@@ -13,6 +13,10 @@ class Task extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'completed_at' => 'datetime',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -21,7 +25,7 @@ class Task extends Model
     public function setStatusAttribute($value)
     {
         $this->attributes['status'] = TaskStatusEnum::GetEnumsNameByValue($value);
-        
+
         if ($value === TaskStatusEnum::COMPLETED && is_null($this->completed_at)) {
             $this->completed_at = now();
         } elseif ($value !== TaskStatusEnum::COMPLETED) {

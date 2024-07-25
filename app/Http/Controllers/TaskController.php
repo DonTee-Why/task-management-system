@@ -30,7 +30,8 @@ class TaskController extends Controller
     public function store(TaskRequest $request)
     {
         $taskData = $request->validated();
-        $taskData['created_by'] = Auth::id();
+        $taskData['user_id'] = Auth::id();
+        
         $task = Task::query()->create($taskData);
 
         return $this->jsonResponse(data: $task, message: 'Task created successfully.', responseCode: 201);
@@ -61,6 +62,6 @@ class TaskController extends Controller
     {
         $task->delete();
 
-        return $this->jsonResponse(message: 'Task deleted successfully.', responseCode: 204);
+        return $this->jsonResponse(message: 'Task deleted successfully.', responseCode: 200);
     }
 }

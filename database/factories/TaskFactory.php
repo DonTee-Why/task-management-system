@@ -28,4 +28,17 @@ class TaskFactory extends Factory
             'user_id' => User::factory()->create()->id,
         ];
     }
+
+    /**
+     * Indicate that the task's status is pending.
+     *
+     * @return \Database\Factories\TaskFactory
+     */
+    public function pending(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => TaskStatusEnum::PENDING,
+            'completed_at' => null,
+        ]);
+    }
 }
